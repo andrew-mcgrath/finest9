@@ -36,7 +36,7 @@ export class GameSetupComponent {
   constructor(
     private router: Router,
     private gameEngine: GameEngineService
-  ) {}
+  ) { }
 
   /**
    * Select play mode
@@ -151,6 +151,13 @@ export class GameSetupComponent {
 
     // Navigate to game board
     this.router.navigate(['/game']);
+  }
+
+  /**
+   * Track by index for ngFor to prevent focus loss
+   */
+  trackByIndex(index: number, item: any): number {
+    return index;
   }
 
   /**

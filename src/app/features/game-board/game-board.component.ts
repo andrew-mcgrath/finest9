@@ -235,7 +235,7 @@ export class GameBoardComponent implements OnInit {
     const state = this.gameState();
 
     if (this.isCurrentPlayerBot) {
-      return 'Bot is playing...';
+      return `${this.currentPlayer()?.name} is playing...`;
     }
 
     switch (state.phase) {
@@ -244,7 +244,7 @@ export class GameBoardComponent implements OnInit {
       case GamePhase.Matching:
         return 'Select a match or draw a card';
       case GamePhase.BotThinking:
-        return 'Bot is thinking...';
+        return `${this.currentPlayer()?.name} is thinking...`;
       case GamePhase.FinalRound:
         return 'Final round! Roll the dice';
       default:
