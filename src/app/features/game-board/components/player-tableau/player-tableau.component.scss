@@ -5,18 +5,20 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &__header {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   &__info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; // Horizontal layout
+    align-items: center;
+    justify-content: space-between;
     gap: 8px;
   }
 
   &__name {
     margin: 0;
-    font-size: 24px;
+    font-size: 20px;
     color: #333;
     display: flex;
     align-items: center;
@@ -24,13 +26,13 @@
   }
 
   &__bot-icon {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   &__stats {
     display: flex;
-    gap: 16px;
-    font-size: 14px;
+    gap: 12px;
+    font-size: 13px;
     color: #666;
   }
 
@@ -41,11 +43,14 @@
   }
 
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    justify-items: center;
-    min-height: 360px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    min-height: 120px; // Reduced from 360px
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
   }
 
   &__empty {

@@ -1,18 +1,18 @@
 .match-selector {
   background: white;
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px; // Reduced from 20px
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   &__title {
-    margin: 0 0 16px;
-    font-size: 20px;
+    margin: 0 0 12px; // Reduced from 16px
+    font-size: 18px; // Reduced from 20px
     color: #333;
   }
 
   &__subtitle {
-    margin: 0 0 12px;
-    font-size: 14px;
+    margin: 0 0 8px; // Reduced from 12px
+    font-size: 13px; // Reduced from 14px
     color: #666;
     font-weight: 500;
   }
@@ -21,11 +21,13 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 12px; // Reduced from 16px
+    max-height: 400px;
+    overflow-y: auto;
   }
 
   &__match {
-    padding: 12px;
+    padding: 10px; // Reduced from 12px
     background: #f9f9f9;
     border: 2px solid #e0e0e0;
     border-radius: 8px;

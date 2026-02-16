@@ -8,33 +8,34 @@
 
     <!-- Main Game Area -->
     <main class="game-board__main">
-      <!-- Phase Instruction -->
-      <div class="game-board__instruction" *ngIf="phaseInstruction">
-        <p>{{ phaseInstruction }}</p>
+      <div class="game-board__play-area">
+        <!-- Phase Instruction -->
+        <div class="game-board__instruction" *ngIf="phaseInstruction">
+          <p>{{ phaseInstruction }}</p>
+        </div>
+
+        <!-- Player Tableau -->
+        <div class="game-board__tableau">
+          <app-player-tableau [player]="currentPlayer()" [selectedCards]="selectedCards()"
+            [highlightedCards]="selectedMatch()?.cards || []"
+            [disabled]="isCurrentPlayerBot || !canRollDice() || rolling()"></app-player-tableau>
+        </div>
       </div>
 
-      <!-- Toast Notifications -->
-      <app-toast></app-toast>
+      <div class="game-board__actions">
+        <!-- Dice Roller -->
+        <div class="game-board__dice">
+          <app-dice-roller [diceRoll]="gameState().lastDiceRoll" [canRoll]="canRollDice() && !isCurrentPlayerBot"
+            [rolling]="rolling()" (rollDice)="onRollDice()"></app-dice-roller>
+        </div>
 
-      <!-- Player Tableau -->
-      <div class="game-board__tableau">
-        <app-player-tableau [player]="currentPlayer()" [selectedCards]="selectedCards()"
-          [highlightedCards]="selectedMatch()?.cards || []"
-          [disabled]="isCurrentPlayerBot || !canRollDice() || rolling()"></app-player-tableau>
-      </div>
-
-      <!-- Dice Roller -->
-      <div class="game-board__dice">
-        <app-dice-roller [diceRoll]="gameState().lastDiceRoll" [canRoll]="canRollDice() && !isCurrentPlayerBot"
-          [rolling]="rolling()" (rollDice)="onRollDice()"></app-dice-roller>
-      </div>
-
-      <!-- Match Selector -->
-      <div class="game-board__matches">
-        <app-match-selector [matches]="possibleMatches()"
-          [canMatch]="gameState().phase === 'matching' && !isCurrentPlayerBot" [selectedMatch]="selectedMatch()"
-          (matchSelected)="onMatchSelected($event)" (drawCard)="onDrawCard()"
-          (confirmMatch)="onConfirmMatch($event)"></app-match-selector>
+        <!-- Match Selector -->
+        <div class="game-board__matches">
+          <app-match-selector [matches]="possibleMatches()" [deckCount]="deckCount()"
+            [canMatch]="(gameState().phase === 'matching' || gameState().phase === 'final-round') && !isCurrentPlayerBot"
+            [selectedMatch]="selectedMatch()" (matchSelected)="onMatchSelected($event)" (drawCard)="onDrawCard()"
+            (confirmMatch)="onConfirmMatch($event)"></app-match-selector>
+        </div>
       </div>
     </main>
   </div>

@@ -18,6 +18,18 @@
   }
 
   &__main {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 20px;
+    align-items: start;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__play-area,
+  &__actions {
     display: flex;
     flex-direction: column;
     gap: 20px;

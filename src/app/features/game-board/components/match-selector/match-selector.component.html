@@ -6,15 +6,10 @@
     <p class="match-selector__subtitle">Possible Matches:</p>
 
     <div class="match-selector__list">
-      <div
-        class="match-selector__match"
-        *ngFor="let match of matches; let i = index"
-        [class.match-selector__match--selected]="isSelected(match)"
-        (click)="onMatchClick(match)"
-        [attr.tabindex]="canMatch ? 0 : -1"
-        role="button"
-        [attr.aria-label]="'Match ' + (i + 1) + ': ' + getMatchTypeName(match.type)"
-      >
+      <div class="match-selector__match" *ngFor="let match of matches; let i = index"
+        [class.match-selector__match--selected]="isSelected(match)" (click)="onMatchClick(match)"
+        [attr.tabindex]="canMatch ? 0 : -1" role="button"
+        [attr.aria-label]="'Match ' + (i + 1) + ': ' + getMatchTypeName(match.type)">
         <div class="match-selector__match-header">
           <span class="match-selector__match-icon">
             {{ getMatchTypeIcon(match.type) }}
@@ -32,12 +27,8 @@
       </div>
     </div>
 
-    <button
-      class="match-selector__confirm-button"
-      *ngIf="selectedMatch"
-      [disabled]="!canMatch"
-      (click)="onConfirmMatchClick()"
-    >
+    <button class="match-selector__confirm-button" *ngIf="selectedMatch" [disabled]="!canMatch"
+      (click)="onConfirmMatchClick()">
       Confirm Match
     </button>
   </div>
@@ -48,12 +39,8 @@
       No matches available with current dice roll.
     </p>
 
-    <button
-      class="match-selector__draw-button"
-      [disabled]="!canMatch"
-      (click)="onDrawCardClick()"
-    >
-      Draw a Card
+    <button class="match-selector__draw-button" [disabled]="!canMatch" (click)="onDrawCardClick()">
+      {{ deckCount > 0 ? 'Draw a Card' : 'Pass Turn' }}
     </button>
   </div>
 </div>

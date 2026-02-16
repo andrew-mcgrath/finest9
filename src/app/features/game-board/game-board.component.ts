@@ -12,8 +12,6 @@ import { GameOverComponent } from '../game-over/game-over.component';
 import { Card } from '../../core/models/card.model';
 import { Match } from '../../core/models/match.model';
 import { GamePhase } from '../../core/models/game-state.model';
-import { ToastService } from '../../core/services/toast.service';
-import { ToastComponent } from '../../shared/components/toast/toast.component';
 
 /**
  * GameBoardComponent - Main game orchestration component
@@ -29,8 +27,7 @@ import { ToastComponent } from '../../shared/components/toast/toast.component';
     DiceRollerComponent,
     MatchSelectorComponent,
     ScoreboardComponent,
-    GameOverComponent,
-    ToastComponent
+    GameOverComponent
   ],
   templateUrl: './game-board.component.html',
   styleUrl: './game-board.component.scss'
@@ -41,7 +38,6 @@ export class GameBoardComponent implements OnInit {
   private gameStateService = inject(GameStateService);
   private gameEngine = inject(GameEngineService);
   private botAI = inject(BotAIService);
-  private toastService = inject(ToastService);
 
   // Signals for reactive state
   selectedCards = signal<Card[]>([]);
@@ -59,15 +55,6 @@ export class GameBoardComponent implements OnInit {
   isFinalRound = this.gameStateService.isFinalRound;
 
   constructor() {
-    // Effect to handle toast for bot thinking
-    effect(() => {
-      if (this.botThinking()) {
-        this.toastService.show('Bot is thinking...', 'info', 0); // 0 duration = stays until hidden
-      } else {
-        this.toastService.hide();
-      }
-    });
-
     // Set up effect to handle bot turns
     effect(() => {
       const state = this.gameState();
@@ -75,7 +62,7 @@ export class GameBoardComponent implements OnInit {
 
       // Check if it's a bot's turn and we're in a phase where bot should act
       if (player?.isBot && !this.isGameOver()) {
-        if (state.phase === GamePhase.Rolling) {
+        if (state.phase === GamePhase.Rolling || state.phase === GamePhase.FinalRound) {
           // Bot needs to roll dice
           setTimeout(() => this.handleBotTurn(), 800);
         } else if (state.phase === GamePhase.Matching) {

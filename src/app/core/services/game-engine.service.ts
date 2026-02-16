@@ -23,7 +23,7 @@ export class GameEngineService {
     private diceService: DiceService,
     private matchValidator: MatchValidatorService,
     private scoringService: ScoringService
-  ) {}
+  ) { }
 
   /**
    * Start a new game

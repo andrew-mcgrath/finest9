@@ -10,26 +10,18 @@
       <div class="dice-roller__placeholder">?</div>
     </div>
 
-    <div class="dice-roller__total" *ngIf="diceRoll">
+    <div class="dice-roller__total">
       <span class="dice-roller__total-label">Total:</span>
-      <span class="dice-roller__total-value">{{ diceRoll.total }}</span>
+      <span class="dice-roller__total-value">{{ diceRoll?.total || '??' }}</span>
     </div>
 
-    <div
-      class="dice-roller__badge"
-      [ngClass]="specialRollBadgeClass"
-      *ngIf="specialRollBadge"
-    >
+    <div class="dice-roller__badge" [ngClass]="specialRollBadgeClass" *ngIf="specialRollBadge">
       {{ specialRollBadge }}
     </div>
   </div>
 
-  <button
-    class="dice-roller__button"
-    [disabled]="!canRoll || rolling"
-    (click)="onRollClick()"
-    [attr.aria-label]="rolling ? 'Rolling dice' : 'Roll dice'"
-  >
+  <button class="dice-roller__button" [disabled]="!canRoll || rolling" (click)="onRollClick()"
+    [attr.aria-label]="rolling ? 'Rolling dice' : 'Roll dice'">
     <span *ngIf="!rolling">🎲 Roll Dice</span>
     <span *ngIf="rolling">Rolling...</span>
   </button>

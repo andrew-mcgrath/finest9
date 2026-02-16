@@ -17,6 +17,7 @@ export class MatchSelectorComponent {
   @Input() matches: Match[] = [];
   @Input() canMatch: boolean = false;
   @Input() selectedMatch: Match | null = null;
+  @Input() deckCount: number = 0;
 
   @Output() matchSelected = new EventEmitter<Match>();
   @Output() drawCard = new EventEmitter<void>();
