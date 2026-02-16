@@ -38,6 +38,10 @@ Requires a standard deck of cards without Jokers and two six sided dice.
 * Wild 9's can be used as part of any pair or sequence
 * Since rolling a 9 means you must re-roll, 9-cards can only be captured as part of a pair or sequence where another card matches the dice
 
+### Special Rolls
+* **Snake Eyes (rolling 2)**: You may capture any single pair from your cards, regardless of their value
+* **Boxcars (rolling 12)**: You may capture any sequence you have, even if none of the cards match the dice roll
+
 ### Matching with Pairs and Sets
 * **The dice value must match the card rank**, not the sum
 * When you match, you capture **ALL cards of that rank**
