@@ -1,0 +1,279 @@
+.game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  &__modal {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    margin: 0 0 24px;
+    font-size: 36px;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__winner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__trophy {
+    font-size: 64px;
+    animation: bounce 1s ease infinite;
+  }
+
+  &__winner-text {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__winner-name {
+    font-weight: bold;
+    color: #667eea;
+  }
+
+  &__rankings {
+    margin-bottom: 32px;
+  }
+
+  &__subtitle {
+    margin: 0 0 16px;
+    font-size: 20px;
+    color: #555;
+    text-align: center;
+  }
+
+  &__rankings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__player {
+    padding: 16px;
+    background: #f9f9f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &--winner {
+      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      border-color: #ff9800;
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+    }
+  }
+
+  &__player-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  &__rank {
+    font-weight: bold;
+    color: #667eea;
+    min-width: 40px;
+    font-size: 18px;
+  }
+
+  &__player-name {
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__bot-icon {
+    font-size: 16px;
+  }
+
+  &__score {
+    font-weight: bold;
+    font-size: 24px;
+    color: #666;
+
+    &--positive {
+      color: #4caf50;
+    }
+
+    &--negative {
+      color: #f44336;
+    }
+  }
+
+  &__player-breakdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+    margin-left: 52px;
+  }
+
+  &__breakdown-item {
+    &:last-child {
+      color: #333;
+    }
+  }
+
+  &__breakdown-divider {
+    color: #999;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__button {
+    flex: 1;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &--primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+      }
+    }
+
+    &--secondary {
+      background: white;
+      border: 2px solid #667eea;
+      color: #667eea;
+
+      &:hover {
+        background: #f5f7ff;
+        transform: translateY(-2px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .game-over {
+    padding: 10px;
+
+    &__modal {
+      padding: 24px;
+    }
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__trophy {
+      font-size: 48px;
+    }
+
+    &__winner-text {
+      font-size: 20px;
+    }
+
+    &__player-breakdown {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      margin-left: 0;
+      margin-top: 8px;
+    }
+
+    &__breakdown-divider {
+      display: none;
+    }
+
+    &__actions {
+      flex-direction: column;
+    }
+  }
+}

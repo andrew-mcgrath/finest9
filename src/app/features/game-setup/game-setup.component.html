@@ -1,0 +1,138 @@
+<div class="game-setup">
+  <div class="game-setup__container">
+    <h1 class="game-setup__title">Finest 9</h1>
+
+    <!-- Mode Selection -->
+    <div class="game-setup__mode-selection" *ngIf="playMode() === null">
+      <h2 class="game-setup__subtitle">Choose Play Mode</h2>
+
+      <div class="game-setup__modes">
+        <button
+          class="game-setup__mode-button"
+          (click)="selectPlayMode('friends')"
+          aria-label="Play with friends"
+        >
+          <span class="game-setup__mode-icon">👥</span>
+          <span class="game-setup__mode-title">Play with Friends</span>
+          <span class="game-setup__mode-description">2-4 players, local hot-seat</span>
+        </button>
+
+        <button
+          class="game-setup__mode-button"
+          (click)="selectPlayMode('bots')"
+          aria-label="Play versus bots"
+        >
+          <span class="game-setup__mode-icon">🤖</span>
+          <span class="game-setup__mode-title">Play vs Bots</span>
+          <span class="game-setup__mode-description">Challenge AI opponents</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Friends Mode Setup -->
+    <div class="game-setup__config" *ngIf="playMode() === 'friends'">
+      <button class="game-setup__back-button" (click)="goBack()">
+        ← Back
+      </button>
+
+      <h2 class="game-setup__subtitle">Player Setup</h2>
+
+      <div class="game-setup__player-count">
+        <label for="player-count">Number of Players:</label>
+        <div class="game-setup__count-buttons">
+          <button
+            *ngFor="let count of [2, 3, 4]"
+            [class.active]="playerCount() === count"
+            (click)="updatePlayerCount(count)"
+            [attr.aria-pressed]="playerCount() === count"
+          >
+            {{ count }}
+          </button>
+        </div>
+      </div>
+
+      <div class="game-setup__player-names">
+        <div
+          class="game-setup__player-input"
+          *ngFor="let name of playerNames(); let i = index"
+        >
+          <label [for]="'player-name-' + (i + 1)">
+            Player {{ i + 1 }} Name:
+          </label>
+          <input
+            [id]="'player-name-' + (i + 1)"
+            type="text"
+            [value]="name"
+            (input)="updatePlayerName(i, $any($event.target).value)"
+            placeholder="Enter name"
+            maxlength="20"
+          />
+        </div>
+      </div>
+
+      <button
+        class="game-setup__start-button"
+        [disabled]="!canStartGame()"
+        (click)="startGame()"
+      >
+        Start Game
+      </button>
+    </div>
+
+    <!-- Bots Mode Setup -->
+    <div class="game-setup__config" *ngIf="playMode() === 'bots'">
+      <button class="game-setup__back-button" (click)="goBack()">
+        ← Back
+      </button>
+
+      <h2 class="game-setup__subtitle">Bot Challenge Setup</h2>
+
+      <div class="game-setup__player-names">
+        <div class="game-setup__player-input">
+          <label for="human-player-name">Your Name:</label>
+          <input
+            id="human-player-name"
+            type="text"
+            [value]="humanPlayerName()"
+            (input)="humanPlayerName.set($any($event.target).value)"
+            placeholder="Enter your name"
+            maxlength="20"
+          />
+        </div>
+      </div>
+
+      <div class="game-setup__bot-count">
+        <label for="bot-count">Number of Bots:</label>
+        <div class="game-setup__count-buttons">
+          <button
+            *ngFor="let count of [1, 2, 3]"
+            [class.active]="botCount() === count"
+            (click)="botCount.set(count)"
+            [attr.aria-pressed]="botCount() === count"
+          >
+            {{ count }}
+          </button>
+        </div>
+      </div>
+
+      <div class="game-setup__bot-preview">
+        <p class="game-setup__bot-preview-title">
+          You'll be playing against:
+        </p>
+        <ul class="game-setup__bot-list">
+          <li *ngFor="let bot of botNames.slice(0, botCount())">
+            🤖 {{ bot }}
+          </li>
+        </ul>
+      </div>
+
+      <button
+        class="game-setup__start-button"
+        [disabled]="!canStartGame()"
+        (click)="startGame()"
+      >
+        Start Game
+      </button>
+    </div>
+  </div>
+</div>

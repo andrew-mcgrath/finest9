@@ -1,0 +1,80 @@
+.player-tableau {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    margin-bottom: 16px;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__bot-icon {
+    font-size: 20px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    justify-items: center;
+    min-height: 360px;
+  }
+
+  &__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: #999;
+    font-size: 18px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .player-tableau {
+    padding: 16px;
+
+    &__name {
+      font-size: 20px;
+    }
+
+    &__grid {
+      gap: 8px;
+      min-height: 270px;
+    }
+
+    &__stats {
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+}

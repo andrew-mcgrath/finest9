@@ -1,0 +1,75 @@
+<div class="game-over">
+  <div class="game-over__overlay" (click)="$event.stopPropagation()"></div>
+
+  <div class="game-over__modal" role="dialog" aria-modal="true" aria-labelledby="game-over-title">
+    <div class="game-over__header">
+      <h2 id="game-over-title" class="game-over__title">Game Over!</h2>
+
+      <div class="game-over__winner" *ngIf="winner">
+        <div class="game-over__trophy">🏆</div>
+        <p class="game-over__winner-text">
+          <span class="game-over__winner-name">{{ winner.name }}</span>
+          <span>wins!</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="game-over__rankings">
+      <h3 class="game-over__subtitle">Final Standings</h3>
+
+      <div class="game-over__rankings-list">
+        <div
+          class="game-over__player"
+          *ngFor="let ranking of rankings"
+          [class.game-over__player--winner]="ranking.player.id === winner?.id"
+        >
+          <div class="game-over__player-header">
+            <span class="game-over__rank">
+              {{ getRankSuffix(ranking.rank) }}
+            </span>
+            <span class="game-over__player-name">
+              <span *ngIf="ranking.player.isBot" class="game-over__bot-icon">🤖</span>
+              {{ ranking.player.name }}
+            </span>
+            <span
+              class="game-over__score"
+              [class.game-over__score--positive]="ranking.score > 0"
+              [class.game-over__score--negative]="ranking.score < 0"
+            >
+              {{ ranking.score > 0 ? '+' : '' }}{{ ranking.score }}
+            </span>
+          </div>
+
+          <div class="game-over__player-breakdown">
+            <span class="game-over__breakdown-item">
+              Captured: {{ getCapturedValue(ranking.player) }} pts
+            </span>
+            <span class="game-over__breakdown-divider">-</span>
+            <span class="game-over__breakdown-item">
+              Remaining: {{ getTableauValue(ranking.player) }} pts
+            </span>
+            <span class="game-over__breakdown-divider">=</span>
+            <span class="game-over__breakdown-item">
+              <strong>{{ getFinalScore(ranking.player) }}</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-over__actions">
+      <button
+        class="game-over__button game-over__button--primary"
+        (click)="onNewGameClick()"
+      >
+        Play Again
+      </button>
+      <button
+        class="game-over__button game-over__button--secondary"
+        (click)="onBackToSetupClick()"
+      >
+        Back to Setup
+      </button>
+    </div>
+  </div>
+</div>

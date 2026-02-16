@@ -1,0 +1,59 @@
+<div class="match-selector">
+  <h3 class="match-selector__title">Actions</h3>
+
+  <!-- Possible Matches -->
+  <div class="match-selector__matches" *ngIf="matches.length > 0">
+    <p class="match-selector__subtitle">Possible Matches:</p>
+
+    <div class="match-selector__list">
+      <div
+        class="match-selector__match"
+        *ngFor="let match of matches; let i = index"
+        [class.match-selector__match--selected]="isSelected(match)"
+        (click)="onMatchClick(match)"
+        [attr.tabindex]="canMatch ? 0 : -1"
+        role="button"
+        [attr.aria-label]="'Match ' + (i + 1) + ': ' + getMatchTypeName(match.type)"
+      >
+        <div class="match-selector__match-header">
+          <span class="match-selector__match-icon">
+            {{ getMatchTypeIcon(match.type) }}
+          </span>
+          <span class="match-selector__match-type">
+            {{ getMatchTypeName(match.type) }}
+          </span>
+          <span class="match-selector__match-score">
+            {{ match.score }} pts
+          </span>
+        </div>
+        <div class="match-selector__match-cards">
+          {{ getCardsSummary(match) }}
+        </div>
+      </div>
+    </div>
+
+    <button
+      class="match-selector__confirm-button"
+      *ngIf="selectedMatch"
+      [disabled]="!canMatch"
+      (click)="onConfirmMatchClick()"
+    >
+      Confirm Match
+    </button>
+  </div>
+
+  <!-- No Matches -->
+  <div class="match-selector__no-matches" *ngIf="matches.length === 0">
+    <p class="match-selector__message">
+      No matches available with current dice roll.
+    </p>
+
+    <button
+      class="match-selector__draw-button"
+      [disabled]="!canMatch"
+      (click)="onDrawCardClick()"
+    >
+      Draw a Card
+    </button>
+  </div>
+</div>

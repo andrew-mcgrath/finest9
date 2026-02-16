@@ -1,0 +1,271 @@
+.game-setup {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  &__container {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-size: 24px;
+    color: #555;
+    margin: 0 0 30px;
+  }
+
+  &__mode-selection {
+    animation: fadeIn 0.3s ease;
+  }
+
+  &__modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  &__mode-button {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 30px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    &:hover {
+      border-color: #667eea;
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
+
+  &__mode-icon {
+    font-size: 48px;
+  }
+
+  &__mode-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__mode-description {
+    font-size: 14px;
+    color: #777;
+  }
+
+  &__config {
+    animation: fadeIn 0.3s ease;
+  }
+
+  &__back-button {
+    background: none;
+    border: none;
+    color: #667eea;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 16px;
+    margin: -20px 0 20px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #764ba2;
+      text-decoration: underline;
+    }
+  }
+
+  &__player-count,
+  &__bot-count {
+    margin-bottom: 30px;
+
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 12px;
+    }
+  }
+
+  &__count-buttons {
+    display: flex;
+    gap: 12px;
+
+    button {
+      flex: 1;
+      padding: 12px 20px;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #667eea;
+      }
+
+      &.active {
+        background: #667eea;
+        border-color: #667eea;
+        color: white;
+      }
+    }
+  }
+
+  &__player-names {
+    margin-bottom: 30px;
+  }
+
+  &__player-input {
+    margin-bottom: 16px;
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+  }
+
+  &__bot-preview {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+  }
+
+  &__bot-preview-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    margin: 0 0 12px;
+  }
+
+  &__bot-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      padding: 8px 0;
+      font-size: 16px;
+      color: #333;
+    }
+  }
+
+  &__start-button {
+    width: 100%;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .game-setup {
+    padding: 10px;
+
+    &__container {
+      padding: 24px;
+    }
+
+    &__title {
+      font-size: 36px;
+      margin-bottom: 24px;
+    }
+
+    &__subtitle {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    &__modes {
+      grid-template-columns: 1fr;
+    }
+
+    &__mode-button {
+      padding: 24px 16px;
+    }
+  }
+}

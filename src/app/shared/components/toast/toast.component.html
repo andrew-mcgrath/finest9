@@ -1,0 +1,8 @@
+<div class="toast-container" *ngIf="toast()">
+    <div class="toast" [ngClass]="['toast--' + toast()?.type]">
+        <div class="toast__icon" *ngIf="toast()?.type === 'info'">🤖</div>
+        <div class="toast__content">
+            {{ toast()?.message }}
+        </div>
+    </div>
+</div>

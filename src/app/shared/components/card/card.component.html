@@ -1,0 +1,29 @@
+<div
+  [ngClass]="cardClasses"
+  (click)="onClick()"
+  (keypress)="onKeyPress($event)"
+  [attr.tabindex]="disabled || showBack ? -1 : 0"
+  [attr.aria-label]="showBack ? 'Card back' : card.rank + ' of ' + card.suit"
+  [attr.aria-disabled]="disabled"
+  role="button"
+>
+  <div class="card__inner" *ngIf="!showBack">
+    <div class="card__corner card__corner--top-left">
+      <div class="card__rank">{{ card.rank }}</div>
+      <div class="card__suit">{{ suitSymbol }}</div>
+    </div>
+
+    <div class="card__corner card__corner--bottom-right">
+      <div class="card__rank">{{ card.rank }}</div>
+      <div class="card__suit">{{ suitSymbol }}</div>
+    </div>
+  </div>
+
+  <div class="card__center" *ngIf="!showBack">
+    <span class="card__suit-large">{{ suitSymbol }}</span>
+  </div>
+
+  <div class="card__back" *ngIf="showBack">
+    <div class="card__back-pattern"></div>
+  </div>
+</div>

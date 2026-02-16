@@ -1,0 +1,18 @@
+<div
+  [ngClass]="dieClasses"
+  [attr.aria-label]="'Die showing ' + value"
+  role="img"
+>
+  <div class="die__face">
+    <div
+      class="die__row"
+      *ngFor="let row of dotPattern; let rowIndex = index"
+    >
+      <div
+        class="die__dot"
+        *ngFor="let hasDot of row; let colIndex = index"
+        [class.die__dot--visible]="hasDot"
+      ></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="scoreboard">
+  <div class="scoreboard__header">
+    <h2 class="scoreboard__title">Scoreboard</h2>
+    <div class="scoreboard__game-info">
+      <div class="scoreboard__deck">
+        <span class="scoreboard__label">Deck:</span>
+        <span class="scoreboard__value">{{ deckCount }} cards</span>
+      </div>
+      <div class="scoreboard__phase" *ngIf="isFinalRound">
+        <span class="scoreboard__final-round-badge">🏁 Final Round</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreboard__current-turn">
+    <p class="scoreboard__turn-text">
+      <span class="scoreboard__turn-label">Current Turn:</span>
+      <span class="scoreboard__turn-player">{{ currentPlayerName }}</span>
+    </p>
+    <p class="scoreboard__phase-text">{{ phaseText }}</p>
+  </div>
+
+  <div class="scoreboard__players">
+    <div
+      class="scoreboard__player"
+      *ngFor="let player of players"
+      [class.scoreboard__player--active]="isCurrentPlayer(player)"
+    >
+      <div class="scoreboard__player-header">
+        <span class="scoreboard__player-name">
+          <span *ngIf="player.isBot" class="scoreboard__bot-icon">🤖</span>
+          {{ player.name }}
+        </span>
+        <span
+          class="scoreboard__player-score"
+          [class.scoreboard__player-score--positive]="getPlayerScore(player) > 0"
+          [class.scoreboard__player-score--negative]="getPlayerScore(player) < 0"
+        >
+          {{ getPlayerScore(player) > 0 ? '+' : '' }}{{ getPlayerScore(player) }}
+        </span>
+      </div>
+      <div class="scoreboard__player-details">
+        <span class="scoreboard__detail">
+          Tableau: {{ player.tableau.length }}
+        </span>
+        <span class="scoreboard__detail">
+          Captured: {{ player.capturedCards.length }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

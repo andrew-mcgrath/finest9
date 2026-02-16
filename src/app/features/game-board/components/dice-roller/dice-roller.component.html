@@ -1,0 +1,36 @@
+<div class="dice-roller">
+  <div class="dice-roller__container">
+    <div class="dice-roller__dice" *ngIf="diceRoll">
+      <app-die [value]="diceRoll.die1" [rolling]="rolling" size="large"></app-die>
+      <app-die [value]="diceRoll.die2" [rolling]="rolling" size="large"></app-die>
+    </div>
+
+    <div class="dice-roller__dice dice-roller__dice--placeholder" *ngIf="!diceRoll">
+      <div class="dice-roller__placeholder">?</div>
+      <div class="dice-roller__placeholder">?</div>
+    </div>
+
+    <div class="dice-roller__total" *ngIf="diceRoll">
+      <span class="dice-roller__total-label">Total:</span>
+      <span class="dice-roller__total-value">{{ diceRoll.total }}</span>
+    </div>
+
+    <div
+      class="dice-roller__badge"
+      [ngClass]="specialRollBadgeClass"
+      *ngIf="specialRollBadge"
+    >
+      {{ specialRollBadge }}
+    </div>
+  </div>
+
+  <button
+    class="dice-roller__button"
+    [disabled]="!canRoll || rolling"
+    (click)="onRollClick()"
+    [attr.aria-label]="rolling ? 'Rolling dice' : 'Roll dice'"
+  >
+    <span *ngIf="!rolling">🎲 Roll Dice</span>
+    <span *ngIf="rolling">Rolling...</span>
+  </button>
+</div>
